@@ -23,7 +23,7 @@ public abstract class CardExpiry implements Comparable<CardExpiry> {
     public abstract LocalDate date();
 
     public static CardExpiry create(YearMonth yearMonth) {
-        return null;
+        return new AutoValue_CardExpiry(yearMonth.toLocalDate(1));
     }
 
     @Override

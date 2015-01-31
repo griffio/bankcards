@@ -4,7 +4,6 @@ import com.google.auto.value.AutoValue;
 import com.google.common.collect.Ordering;
 
 import java.util.Comparator;
-
 /**
  * AutoValue (https://github.com/google/auto/tree/master/value)
  * An immutable value type to represent the card record with nested values
@@ -29,7 +28,7 @@ public abstract class CardRecord {
     public abstract CardExpiry expiry();
 
     public static CardRecord create(CardIssuer bank, CardNumber number, CardExpiry expiry) {
-        return null;
+        return new AutoValue_CardRecord(bank, number, expiry);
     }
 
 }

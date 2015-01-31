@@ -12,7 +12,7 @@ public abstract class CardIssuer {
     public abstract String bank();
 
     public static CardIssuer create(String bank) {
-        return null;
+        return new AutoValue_CardIssuer(bank);
     }
 
 }
