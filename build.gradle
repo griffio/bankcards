@@ -29,7 +29,8 @@ dependencies {
       "org.slf4j:slf4j-api:${slf4j_api_version}",
       "joda-time:joda-time:${joda_time_version}",
       "ch.qos.logback:logback-classic:${logback_version}",
-      "com.google.code.findbugs:jsr305:${jsr305_version}"
+      "com.google.code.findbugs:jsr305:${jsr305_version}",
+      "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:${jackson_dataformat_csv_version}"
   )
 
   testCompile(

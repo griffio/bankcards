@@ -1,5 +1,7 @@
 package griffio.example.bankcard;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 
 import static com.google.common.base.CharMatcher.DIGIT;
@@ -20,7 +22,7 @@ public abstract class CardNumber {
         String fourDigits = digits().substring(0, 4);
         return fourDigits.concat(DIGIT.replaceFrom(digits().substring(4), 'x'));
     }
-
+    @JsonCreator
     public static CardNumber create(String digits) {
         return new AutoValue_CardNumber(digits);
     }

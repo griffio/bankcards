@@ -21,10 +21,10 @@ public class CardRecordTest {
 
     @Before
     public void setUp() throws Exception {
-        nov2017 = CardRecord.create(CardIssuer.create("HSBC Canada"), CardNumber.create("5601‐2345‐3446‐5678"), CardExpiry.create(YearMonth.parse("2017-11")));
-        oct2017 = CardRecord.create(CardIssuer.create("Royal Bank of Canada"), CardNumber.create("4519‐4532‐4524‐2456"), CardExpiry.create(YearMonth.parse("2017-10")));
-        dec2018 = CardRecord.create(CardIssuer.create("American Express"), CardNumber.create("3786‐7334‐8965‐345"), CardExpiry.create(YearMonth.parse("2018-12")));
-        duplicateNov2017 = CardRecord.create(CardIssuer.create("HSBC Canada"), CardNumber.create("5601‐2345‐3446‐5678"), CardExpiry.create(YearMonth.parse("2017-11")));
+        nov2017 = CardRecord.create(CardIssuer.create("HSBC Canada"), CardNumber.create("5601‐2345‐3446‐5678"), CardExpiry.create("Nov-2017"));
+        oct2017 = CardRecord.create(CardIssuer.create("Royal Bank of Canada"), CardNumber.create("4519‐4532‐4524‐2456"), CardExpiry.create("Oct-2017"));
+        dec2018 = CardRecord.create(CardIssuer.create("American Express"), CardNumber.create("3786‐7334‐8965‐345"), CardExpiry.create("Dec-2018"));
+        duplicateNov2017 = CardRecord.create(CardIssuer.create("HSBC Canada"), CardNumber.create("5601‐2345‐3446‐5678"), CardExpiry.create("Nov-2017"));
     }
 
     @Test(expected = NullPointerException.class)

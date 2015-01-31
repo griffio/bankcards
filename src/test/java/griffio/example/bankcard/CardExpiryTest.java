@@ -25,10 +25,10 @@ public class CardExpiryTest {
 
     @Before
     public void setUp() throws Exception {
-        nov2017 = CardExpiry.create(YearMonth.parse("2017-11"));
-        oct2017 = CardExpiry.create(YearMonth.parse("2017-10"));
-        dec2018 = CardExpiry.create(YearMonth.parse("2018-12"));
-        duplicateNov2017 = CardExpiry.create(YearMonth.parse("2017-11"));
+        nov2017 = CardExpiry.create("Nov-2017");
+        oct2017 = CardExpiry.create("Oct-2017");
+        dec2018 = CardExpiry.create("Dec-2018");
+        duplicateNov2017 = CardExpiry.create("Nov-2017");
     }
 
     @Test
