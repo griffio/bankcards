@@ -14,6 +14,11 @@ public class CardNumberTest {
     public void setUp() throws Exception {
     }
 
+    @Test(expected = NullPointerException.class)
+    public void shows_that_null_arguments_before_construction_throw_exception() {
+        CardExpiry.create(null);
+    }
+
     @Test
     public void mask_all_digits() throws Exception {
         String masked = DIGIT.replaceFrom(fixture, "x");

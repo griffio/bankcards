@@ -2,7 +2,6 @@ package griffio.example.bankcard;
 
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Iterables;
-import org.joda.time.YearMonth;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -25,13 +24,6 @@ public class CardRecordTest {
         oct2017 = CardRecord.create(CardIssuer.create("Royal Bank of Canada"), CardNumber.create("4519‐4532‐4524‐2456"), CardExpiry.create("Oct-2017"));
         dec2018 = CardRecord.create(CardIssuer.create("American Express"), CardNumber.create("3786‐7334‐8965‐345"), CardExpiry.create("Dec-2018"));
         duplicateNov2017 = CardRecord.create(CardIssuer.create("HSBC Canada"), CardNumber.create("5601‐2345‐3446‐5678"), CardExpiry.create("Nov-2017"));
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void shows_that_autovalue_checks_null_arguments_before_construction() {
-        CardExpiry.create(null);
-        CardIssuer.create(null);
-        CardNumber.create(null);
     }
 
     @Test
