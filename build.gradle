@@ -1,0 +1,40 @@
+plugins {
+  id 'java'
+  id 'application'
+  id 'com.ewerk.gradle.plugins.auto-value' version '1.0.1'
+}
+
+autoValue {
+  autoValueSourcesDir = 'src/autovalue/java'
+}
+
+repositories {
+  jcenter()
+}
+
+ext.version='0.1.0-SNAPSHOT'
+
+apply from: 'wrapper.gradle'
+
+tasks.withType(JavaCompile) {
+  description = "javac: ignore processor hints, keep all other hints"
+  sourceCompatibility = JavaVersion.VERSION_1_7
+  targetCompatibility = JavaVersion.VERSION_1_7
+  options.compilerArgs += ["-Xlint:all,-processing"]
+}
+
+dependencies {
+
+  compile(
+      "org.slf4j:slf4j-api:${slf4j_api_version}",
+      "joda-time:joda-time:${joda_time_version}",
+      "ch.qos.logback:logback-classic:${logback_version}",
+      "com.google.code.findbugs:jsr305:${jsr305_version}"
+  )
+
+  testCompile(
+      "junit:junit:${junit_version}",
+      "com.google.truth:truth:${truth_version}"
+  )
+
+}
