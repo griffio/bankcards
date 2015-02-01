@@ -2,7 +2,13 @@ plugins {
   id 'java'
   id 'application'
   id 'com.ewerk.gradle.plugins.auto-value' version '1.0.1'
+  id 'jetty'
+  id 'war'
 }
+
+httpPort = 8080
+stopPort = 9090
+stopKey = "stopKey"
 
 autoValue {
   autoValueSourcesDir = 'src/autovalue/java'
@@ -22,20 +28,21 @@ tasks.withType(JavaCompile) {
   targetCompatibility = JavaVersion.VERSION_1_7
   options.compilerArgs += ["-Xlint:all,-processing"]
 }
-
+1
 dependencies {
-
-  compile(
-      "org.slf4j:slf4j-api:${slf4j_api_version}",
-      "joda-time:joda-time:${joda_time_version}",
-      "ch.qos.logback:logback-classic:${logback_version}",
-      "com.google.code.findbugs:jsr305:${jsr305_version}",
-      "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:${jackson_dataformat_csv_version}"
-  )
 
   testCompile(
       "junit:junit:${junit_version}",
       "com.google.truth:truth:${truth_version}"
   )
 
+  compile(
+      "org.slf4j:slf4j-api:${slf4j_api_version}",
+      "joda-time:joda-time:${joda_time_version}",
+      "ch.qos.logback:logback-classic:${logback_version}",
+      "com.google.code.findbugs:jsr305:${jsr305_version}",
+      "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:${jackson_dataformat_csv_version}",
+      "org.glassfish.jersey.containers:jersey-container-jetty-servlet:${glassfish_jersey_version}",
+      "org.glassfish.jersey.media:jersey-media-multipart:${glassfish_jersey_version}"
+  )
 }

@@ -9,6 +9,8 @@ import griffio.example.bankcard.CardRecord;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 public class CardRecordsCsvTest {
 
     private String csv1;
@@ -34,7 +36,7 @@ public class CardRecordsCsvTest {
             cardRecordsSet.add(row.nextValue());
         }
 
-        Truth.ASSERT.that(cardRecordsSet).hasSize(3);
+        Truth.ASSERT.that(cardRecordsSet).hasSize(5);
 
     }
 
@@ -51,4 +53,14 @@ public class CardRecordsCsvTest {
         Truth.ASSERT.that(cardRecordsSet).hasSize(3);
 
     }
+
+    @Test
+    public void load_csv_into_recordset_mapper() throws IOException {
+
+        CardRecordsSet cardRecordsSet = new CardRecordsSet();
+        CardRecordsSetCsvMapper cardRecordsSetCsvMapper = new CardRecordsSetCsvMapper(cardRecordsSet);
+        int loaded = cardRecordsSetCsvMapper.load(csv1);
+        Truth.ASSERT.that(loaded).isEqualTo(5);
+    }
+
 }

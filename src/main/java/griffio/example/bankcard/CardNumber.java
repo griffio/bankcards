@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 
+import javax.annotation.Nonnull;
+
 import static com.google.common.base.CharMatcher.DIGIT;
 
 /**
@@ -11,7 +13,7 @@ import static com.google.common.base.CharMatcher.DIGIT;
  * An immutable value type to represent the card number.
  */
 @AutoValue
-public abstract class CardNumber {
+public abstract class CardNumber implements Comparable<CardNumber> {
 
     CardNumber() {
     }
@@ -22,8 +24,14 @@ public abstract class CardNumber {
         String fourDigits = digits().substring(0, 4);
         return fourDigits.concat(DIGIT.replaceFrom(digits().substring(4), 'x'));
     }
+
     @JsonCreator
     public static CardNumber create(String digits) {
         return new AutoValue_CardNumber(digits);
+    }
+
+    @Override
+    public int compareTo(@Nonnull CardNumber other) {
+        return this.digits().compareTo(other.digits());
     }
 }

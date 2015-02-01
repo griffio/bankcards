@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
- * Store a mutable set of records with expiry date ordering.
+ * Store a mutable set of records with descending expiry first ordering.
  * Can be accessed concurrently.
  */
 @ThreadSafe
@@ -17,7 +17,7 @@ public final class CardRecordsSet implements Iterable<CardRecord> {
     private final Set<CardRecord> cardRecords;
 
     public CardRecordsSet() {
-        this.cardRecords = new ConcurrentSkipListSet<>(CardRecord.expiryOrdering);
+        this.cardRecords = new ConcurrentSkipListSet<>(CardRecord.ORDERING);
     }
 
     public boolean add(CardRecord cardRecord) {
