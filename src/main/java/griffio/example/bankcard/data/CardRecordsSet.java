@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * Store a mutable set of records with descending expiry first ordering.
- * Can be accessed concurrently.
+ * Protects against duplicate data  and can be accessed concurrently.
  */
 @ThreadSafe
 public final class CardRecordsSet implements Iterable<CardRecord> {

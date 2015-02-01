@@ -2,9 +2,11 @@ package griffio.example.bankcard;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
+import griffio.example.bankcard.data.CardRecordSerializer;
 
 import java.util.Comparator;
 
@@ -13,6 +15,7 @@ import java.util.Comparator;
  * An immutable value type to represent the card record with nested values.
  */
 @AutoValue
+@JsonSerialize(using = CardRecordSerializer.class)
 public abstract class CardRecord {
     /**
      * Ordering is expiry(descending), issuer(ascending), number(ascending)
@@ -37,8 +40,8 @@ public abstract class CardRecord {
     public abstract CardExpiry expiry();
 
     @JsonCreator
-    public static CardRecord create(@JsonProperty("bank") CardIssuer bank, @JsonProperty("cardNumber") CardNumber cardNumber, @JsonProperty("expiry") CardExpiry expiry) {
-        return new AutoValue_CardRecord(bank, cardNumber, expiry);
+    public static CardRecord create(@JsonProperty("bank") CardIssuer bank, @JsonProperty("cardnumber") CardNumber cardnumber, @JsonProperty("expiry") CardExpiry expiry) {
+        return new AutoValue_CardRecord(bank, cardnumber, expiry);
     }
 
 }

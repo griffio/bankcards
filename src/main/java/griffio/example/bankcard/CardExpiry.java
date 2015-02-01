@@ -29,6 +29,10 @@ public abstract class CardExpiry implements Comparable<CardExpiry> {
 
     public abstract LocalDate date();
 
+    public String toYearMonthFormat() {
+        return date().toString(expiryFormat);
+    }
+
     @JsonCreator
     public static CardExpiry create(String yearMonth) {
         return new AutoValue_CardExpiry(YearMonth.parse(yearMonth, expiryFormat).toLocalDate(1));

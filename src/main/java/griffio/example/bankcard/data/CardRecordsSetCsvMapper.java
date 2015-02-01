@@ -7,6 +7,10 @@ import griffio.example.bankcard.CardRecord;
 
 import java.io.IOException;
 
+/**
+ * CSV Mapper to load file into RecordSet.
+ * Load method returns the count of successful records added.
+ */
 public class CardRecordsSetCsvMapper {
 
     private final ObjectReader csvReader;
@@ -15,7 +19,7 @@ public class CardRecordsSetCsvMapper {
     public CardRecordsSetCsvMapper(CardRecordsSet cardRecordsSet) {
         this.cardRecordsSet = cardRecordsSet;
 
-        CsvSchema schema = CsvSchema.builder().addColumn("bank").addColumn("cardNumber").addColumn("expiry").build();
+        CsvSchema schema = CsvSchema.builder().addColumn("bank").addColumn("cardnumber").addColumn("expiry").build();
         com.fasterxml.jackson.dataformat.csv.CsvMapper mapper = new com.fasterxml.jackson.dataformat.csv.CsvMapper();
         csvReader = mapper.reader(CardRecord.class).with(schema);
 

@@ -4,10 +4,12 @@ import com.google.common.collect.Iterables;
 import griffio.example.bankcard.CardRecord;
 import griffio.example.bankcard.data.CardRecordsSet;
 import griffio.example.bankcard.data.CardRecordsSetCsvMapper;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
@@ -17,8 +19,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/")
 public class CardResource {
@@ -27,15 +30,17 @@ public class CardResource {
 
     @GET
     @Path("/list")
-    public Response list() {
-        StringBuilder response = new StringBuilder();
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CardRecord> list() {
+
+        List<CardRecord> response = new ArrayList<>();
 
         CardRecordsSet cardRecordsSet = Application.cardRecordsSet;
         for (CardRecord cardRecord : cardRecordsSet) {
-            response.append(cardRecord).append("\n");
+            response.add(cardRecord);
         }
 
-        return Response.status(200).entity(response.toString()).build();
+        return response;
     }
 
     @POST
@@ -43,19 +48,27 @@ public class CardResource {
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void post(@BeanParam BankCardForm form,
-                     @Context HttpServletResponse servletResponse) throws IOException {
+                     @Context HttpServletResponse servletResponse,
+                     @Context HttpServletRequest servletRequest) throws IOException {
         boolean updated = Application.cardRecordsSet.add(form.toCardRecord());
         log.debug(Iterables.toString(Application.cardRecordsSet));
-        servletResponse.sendRedirect("/list.html?updated="+updated);
+        servletResponse.sendRedirect(servletRequest.getContextPath() + "/index.html?updated=" + updated);
     }
 
     @POST
     @Path("/upload")
+    @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response post(@FormDataParam("csv") String csv) throws IOException {
+    public void post(@FormDataParam("csv") FormDataContentDisposition csvForm,
+                     @FormDataParam("csv") String csv,
+                     @Context HttpServletResponse servletResponse,
+                     @Context HttpServletRequest servletRequest) throws IOException {
+
         CardRecordsSetCsvMapper csvMapper = new CardRecordsSetCsvMapper(Application.cardRecordsSet);
         int loaded = csvMapper.load(csv);
+        log.debug(csvForm.getFileName());
         log.debug(Iterables.toString(Application.cardRecordsSet));
-        return Response.status(200).entity(String.format("csv rows added: %d", loaded)).build();
+        servletResponse.sendRedirect(servletRequest.getContextPath() + "/index.html?loaded=" + loaded);
     }
+
 }

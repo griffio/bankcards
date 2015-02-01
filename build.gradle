@@ -28,12 +28,13 @@ tasks.withType(JavaCompile) {
   targetCompatibility = JavaVersion.VERSION_1_7
   options.compilerArgs += ["-Xlint:all,-processing"]
 }
-1
+
 dependencies {
 
   testCompile(
       "junit:junit:${junit_version}",
-      "com.google.truth:truth:${truth_version}"
+      "com.google.truth:truth:${truth_version}",
+      "org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jetty:${glassfish_jersey_version}"
   )
 
   compile(
@@ -42,7 +43,11 @@ dependencies {
       "ch.qos.logback:logback-classic:${logback_version}",
       "com.google.code.findbugs:jsr305:${jsr305_version}",
       "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:${jackson_dataformat_csv_version}",
-      "org.glassfish.jersey.containers:jersey-container-jetty-servlet:${glassfish_jersey_version}",
+      "org.glassfish.jersey.media:jersey-media-json-jackson:${glassfish_jersey_version}",
       "org.glassfish.jersey.media:jersey-media-multipart:${glassfish_jersey_version}"
+  )
+
+  providedCompile(
+      "org.glassfish.jersey.containers:jersey-container-jetty-servlet:${glassfish_jersey_version}"
   )
 }

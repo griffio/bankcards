@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.FormParam;
 
+/**
+ * This collects the form post params and could be used for further validation
+ */
 public final class BankCardForm {
 
     Logger log = LoggerFactory.getLogger(BankCardForm.class);
