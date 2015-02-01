@@ -1,6 +1,12 @@
 $.get("application/list", function (data) {
+    // creates a new tbody container for tr>td elements
+    if (window.console) {
+        console.log(data);
+    }
     var i;
     var rows = document.createDocumentFragment();
+    var tbody = document.createElement("tbody");
+    rows.appendChild(tbody);
     for (i = 0; i < data.length; i++) {
         var tr = document.createElement("tr");
         var tdBank = document.createElement("td");
@@ -12,7 +18,7 @@ $.get("application/list", function (data) {
         tr.appendChild(tdBank);
         tr.appendChild(tdNumber);
         tr.appendChild(tdExpiry);
-        rows.appendChild(tr);
+        tbody.appendChild(tr);
     }
-    $("#js-bankcards-tbody").append(rows);
+    $("#js-bankcards-tbody").html(rows.firstChild.innerHTML)
 });

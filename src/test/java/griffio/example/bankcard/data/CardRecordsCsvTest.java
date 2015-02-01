@@ -13,15 +13,17 @@ import java.io.IOException;
 
 public class CardRecordsCsvTest {
 
+    private String csv0;
     private String csv1;
     private String csv2;
     private ObjectReader csvReader;
 
     @Before
     public void setUp() throws Exception {
+        csv0 = TestFixtureResource.fixture("griffio.example.bankcard.data/data0.csv");
         csv1 = TestFixtureResource.fixture("griffio.example.bankcard.data/data1.csv");
         csv2 = TestFixtureResource.fixture("griffio.example.bankcard.data/data2.csv");
-        CsvSchema schema = CsvSchema.builder().addColumn("bank").addColumn("cardNumber").addColumn("expiry").build();
+        CsvSchema schema = CsvSchema.builder().addColumn("bank").addColumn("cardnumber").addColumn("expiry").build();
         CsvMapper mapper = new CsvMapper();
         csvReader = mapper.reader(CardRecord.class).with(schema);
     }
@@ -56,10 +58,11 @@ public class CardRecordsCsvTest {
 
     @Test
     public void load_csv_into_recordset_mapper() throws IOException {
-
         CardRecordsSet cardRecordsSet = new CardRecordsSet();
         CardRecordsSetCsvMapper cardRecordsSetCsvMapper = new CardRecordsSetCsvMapper(cardRecordsSet);
-        int loaded = cardRecordsSetCsvMapper.load(csv1);
+        int loaded = cardRecordsSetCsvMapper.load(csv0);
+        loaded += cardRecordsSetCsvMapper.load(csv1);
+        loaded += cardRecordsSetCsvMapper.load(csv2);
         Truth.ASSERT.that(loaded).isEqualTo(5);
     }
 

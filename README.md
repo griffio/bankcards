@@ -18,6 +18,12 @@ The implementation has these requirements:-
 1. The end user should be able to enter the card data manually, one row at a time
 1. Upload a CSV file with the columns in the order shown above
 
+The Csv supported would look like.
+```
+A & B Bank,1234-4532-4524-2456,Oct-2017
+Z & A Bank,1234-4532-4524-2456,Oct-2017
+Q & A Bank,1234-4532-4524-1111,Jan-2022
+``
 In this application there is no "per user" session or state. The data operations can be 'curled' easily.
 
 ```

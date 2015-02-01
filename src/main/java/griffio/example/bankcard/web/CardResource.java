@@ -17,8 +17,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,7 @@ public class CardResource {
     @GET
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CardRecord> list() {
+    public Response list() {
 
         List<CardRecord> response = new ArrayList<>();
 
@@ -40,7 +42,14 @@ public class CardResource {
             response.add(cardRecord);
         }
 
-        return response;
+        log.debug(Iterables.toString(response));
+
+        CacheControl cc = new CacheControl();
+        cc.setNoCache(true);
+        Response.ResponseBuilder builder = Response.ok(response,MediaType.APPLICATION_JSON_TYPE);
+        builder.cacheControl(cc);
+
+        return builder.build();
     }
 
     @POST
@@ -51,7 +60,6 @@ public class CardResource {
                      @Context HttpServletResponse servletResponse,
                      @Context HttpServletRequest servletRequest) throws IOException {
         boolean updated = Application.cardRecordsSet.add(form.toCardRecord());
-        log.debug(Iterables.toString(Application.cardRecordsSet));
         servletResponse.sendRedirect(servletRequest.getContextPath() + "/index.html?updated=" + updated);
     }
 
@@ -67,7 +75,6 @@ public class CardResource {
         CardRecordsSetCsvMapper csvMapper = new CardRecordsSetCsvMapper(Application.cardRecordsSet);
         int loaded = csvMapper.load(csv);
         log.debug(csvForm.getFileName());
-        log.debug(Iterables.toString(Application.cardRecordsSet));
         servletResponse.sendRedirect(servletRequest.getContextPath() + "/index.html?loaded=" + loaded);
     }
 
