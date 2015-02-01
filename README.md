@@ -57,10 +57,10 @@ http://localhost:8080/bankcards/index.html
 
 ### Resources
 
-GET /bankcards/index.html
-GET /bankcards/application/list
-POST /bankcards/application/form
-POST /bankcards/application/upload
+* GET /bankcards/index.html
+* GET /bankcards/application/list
+* POST /bankcards/application/form
+* POST /bankcards/application/upload
 
 ### Jersey 2.15 Servlets
 
