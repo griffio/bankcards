@@ -42,7 +42,7 @@ Double submits or duplicate file uploads are prevented against.
 
 ### Gradle
 
-With the repository cloned locally, to download the internet by executing gradlew.
+With the repository cloned locally, proceed to download the internet by executing gradlew.
 
 ```
 ./gradlew jettyRun
