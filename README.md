@@ -20,7 +20,7 @@ The implementation has these requirements:-
 1. Sort the data by Expiry date in descending order
 1. Replace card number after the first 4 digits with ‘x’
 1. The end user should be able to enter the card data manually, one row at a time
-1. Upload a CSV file with the columns in the order shown above
+1. Upload a CSV file with the columns in the order shown
 
 The Csv supported would look like.
 
