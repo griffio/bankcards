@@ -1,7 +1,6 @@
 package griffio.example.bankcard;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.Ordering;
 import org.joda.time.LocalDate;
