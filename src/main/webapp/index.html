@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bank Cards</title>
     <link rel="stylesheet" href="css/pure-min.css">
+    <link rel="stylesheet" href="css/application.css">
 </head>
-
 <body>
 <div class="pure-g">
     <div class="pure-u-1-4"></div>
@@ -26,12 +26,25 @@
             </tr>
             </thead>
             <tbody id="js-bankcards-tbody">
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
             </tbody>
         </table>
     </div>
     <div class="pure-u-1-2">
 
-        <form class="pure-form pure-form-stacked" name="csvupload" action="application/upload" method="post" enctype="multipart/form-data">
+        <form class="pure-form pure-form-stacked" name="csvupload" action="application/upload" method="post"
+              enctype="multipart/form-data">
             <fieldset>
                 <legend>Upload Csv</legend>
                 <input placeholder="csv" type="file" id="csv-upload" name="csv"/>

@@ -33,7 +33,7 @@ public class CardResource {
     @GET
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response list() {
+    public Response listWithNoCache() {
 
         List<CardRecord> response = new ArrayList<>();
 
@@ -71,7 +71,6 @@ public class CardResource {
                      @FormDataParam("csv") String csv,
                      @Context HttpServletResponse servletResponse,
                      @Context HttpServletRequest servletRequest) throws IOException {
-
         CardRecordsSetCsvMapper csvMapper = new CardRecordsSetCsvMapper(Application.cardRecordsSet);
         int loaded = csvMapper.load(csv);
         log.debug(csvForm.getFileName());
