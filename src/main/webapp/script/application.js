@@ -1,29 +1,11 @@
 $.get("application/list", function (data) {
-    // creates a new tbody container for tr>td elements
-    var i;
-    var frag = document.createDocumentFragment();
-    var tbody = document.createElement("tbody");
-    var tr;
-    var tdBank;
-    var tdNumber;
-    var tdExpiry;
 
-    frag.appendChild(tbody);
+    var tbody = ['<tbody>'];
 
-    for (i = 0; i < data.length; i++) {
-        tr = document.createElement("tr");
-        tdBank = document.createElement("td");
-        tdNumber = document.createElement("td");
-        tdExpiry = document.createElement("td");
-        tdBank.innerHTML = data[i].bankname;
-        tdNumber.innerHTML = data[i].cardnumber;
-        tdExpiry.innerHTML = data[i].expiry;
-        tr.appendChild(tdBank);
-        tr.appendChild(tdNumber);
-        tr.appendChild(tdExpiry);
-        tbody.appendChild(tr);
-    }
+    $.each(data, function (index, row) {
+        tbody += '<tr><td>' + row.bankname + '</td><td>' + row.cardnumber + '</td><td>' + row.expiry + '</td></tr>';
+    });
 
-    $("#js-bankcards-tbody").html(frag.firstChild.innerHTML).show();
+    $("#js-bankcards-table").append(tbody).show();
 
 });
