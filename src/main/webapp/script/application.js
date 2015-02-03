@@ -1,11 +1,16 @@
-$.get("application/list", function (data) {
+$(function() {
 
-    var tbody = ['<tbody>'];
+    $.get("application/list", function (data) {
 
-    $.each(data, function (index, row) {
-        tbody += '<tr><td>' + row.bankname + '</td><td>' + row.cardnumber + '</td><td>' + row.expiry + '</td></tr>';
+        var tbody = ['<tbody>'];
+
+        $.each(data, function (index, row) {
+            tbody += '<tr><td>' + row.bankname + '</td><td>' + row.cardnumber + '</td><td>' + row.expiry + '</td></tr>';
+        });
+
+        $("#js-bankcards-table").append(tbody).show();
+
     });
 
-    $("#js-bankcards-table").append(tbody).show();
-
 });
+
