@@ -1,5 +1,7 @@
 package griffio.example.bankcard;
 
+import com.google.common.base.CharMatcher;
+import com.google.common.base.Preconditions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,6 +37,23 @@ public class CardNumberTest {
     public void cardnumber_retains_first_four_digits() throws Exception {
         CardNumber cardNumber = CardNumber.create(fixture);
         ASSERT.that(cardNumber.maskedDigits()).isEqualTo("1234-xxxx-xxxx-xxxx");
+    }
+
+    @Test
+    public void allow_simple_valid_amount_of_digits() throws Exception {
+        String digits = DIGIT.retainFrom(fixture);
+        ASSERT.that(digits.length() == 15 || digits.length() == 16).isTrue();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void dont_allow_invalid_amount_of_digits() throws Exception {
+        String digits = DIGIT.retainFrom(fixture.substring(3));
+        Preconditions.checkArgument(digits.length() == 15 || digits.length() == 16);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void card_number_has_invalid_amount_of_digits() throws Exception {
+        CardNumber.create(fixture.substring(3));
     }
 
 }
