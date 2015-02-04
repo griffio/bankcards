@@ -15,8 +15,14 @@ public class Application extends ResourceConfig {
 
     public static final CardRecordsSet cardRecordsSet = new CardRecordsSet();
 
+    private static ResourceConfig createResourceConfig() {
+        return new ResourceConfig()
+                .register(new CardResource(cardRecordsSet))
+                .register(MultiPartFeature.class);
+    }
+
     public Application() throws IOException {
-        super(CardResource.class, MultiPartFeature.class);
+        super(createResourceConfig());
         CardRecordsSetCsvMapper cardRecordsSetCsvMapper = new CardRecordsSetCsvMapper(cardRecordsSet);
         cardRecordsSetCsvMapper.load(csv());
     }

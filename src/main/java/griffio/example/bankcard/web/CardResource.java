@@ -9,6 +9,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.BeanParam;
@@ -30,6 +31,12 @@ public class CardResource {
 
     Logger log = LoggerFactory.getLogger(CardResource.class);
 
+    private final CardRecordsSet cardRecordsSet;
+
+    public CardResource(CardRecordsSet cardRecordsSet) {
+        this.cardRecordsSet = cardRecordsSet;
+    }
+
     @GET
     @Path("/list")
     @Produces(MediaType.APPLICATION_JSON)
@@ -37,7 +44,7 @@ public class CardResource {
 
         List<CardRecord> response = new ArrayList<>();
 
-        CardRecordsSet cardRecordsSet = Application.cardRecordsSet;
+
         for (CardRecord cardRecord : cardRecordsSet) {
             response.add(cardRecord);
         }

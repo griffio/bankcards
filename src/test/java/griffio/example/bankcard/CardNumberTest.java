@@ -1,6 +1,5 @@
 package griffio.example.bankcard;
 
-import com.google.common.base.CharMatcher;
 import com.google.common.base.Preconditions;
 import org.junit.Before;
 import org.junit.Test;
