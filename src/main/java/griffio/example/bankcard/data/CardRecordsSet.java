@@ -2,7 +2,6 @@ package griffio.example.bankcard.data;
 
 import griffio.example.bankcard.CardRecord;
 
-import javax.annotation.Resource;
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Iterator;
 import java.util.Set;

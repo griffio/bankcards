@@ -23,7 +23,7 @@ public class CardRecordsCsvTest {
         csv0 = TestFixtureResource.fixture("griffio.example.bankcard.data/data0.csv");
         csv1 = TestFixtureResource.fixture("griffio.example.bankcard.data/data1.csv");
         csv2 = TestFixtureResource.fixture("griffio.example.bankcard.data/data2.csv");
-        CsvSchema schema = CsvSchema.builder().addColumn("bank").addColumn("cardnumber").addColumn("expiry").build();
+        CsvSchema schema = CsvSchema.builder().addColumn("bankname").addColumn("cardnumber").addColumn("expiry").build();
         CsvMapper mapper = new CsvMapper();
         csvReader = mapper.reader(CardRecord.class).with(schema);
     }

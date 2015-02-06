@@ -2,6 +2,7 @@ package griffio.example.bankcard.data;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectReader;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import griffio.example.bankcard.CardRecord;
 
@@ -13,14 +14,15 @@ import java.io.IOException;
  */
 public class CardRecordsSetCsvMapper {
 
+    private final CsvSchema schema;
     private final ObjectReader csvReader;
     private final CardRecordsSet cardRecordsSet;
 
     public CardRecordsSetCsvMapper(CardRecordsSet cardRecordsSet) {
         this.cardRecordsSet = cardRecordsSet;
 
-        CsvSchema schema = CsvSchema.builder().addColumn("bank").addColumn("cardnumber").addColumn("expiry").build();
-        com.fasterxml.jackson.dataformat.csv.CsvMapper mapper = new com.fasterxml.jackson.dataformat.csv.CsvMapper();
+        schema = CsvSchema.builder().addColumn("bankname").addColumn("cardnumber").addColumn("expiry").build();
+        CsvMapper mapper = new com.fasterxml.jackson.dataformat.csv.CsvMapper();
         csvReader = mapper.reader(CardRecord.class).with(schema);
 
     }
@@ -34,5 +36,10 @@ public class CardRecordsSetCsvMapper {
             }
         }
         return count;
+    }
+
+    public String toCsv() throws IOException {
+        CsvMapper mapper = new CsvMapper();
+        return mapper.writer(schema).writeValueAsString(cardRecordsSet.iterator()).trim();
     }
 }

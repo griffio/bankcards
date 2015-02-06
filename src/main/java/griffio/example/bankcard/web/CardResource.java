@@ -9,7 +9,6 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.BeanParam;
@@ -29,9 +28,8 @@ import java.util.List;
 @Path("/")
 public class CardResource {
 
-    Logger log = LoggerFactory.getLogger(CardResource.class);
-
     private final CardRecordsSet cardRecordsSet;
+    Logger log = LoggerFactory.getLogger(CardResource.class);
 
     public CardResource(CardRecordsSet cardRecordsSet) {
         this.cardRecordsSet = cardRecordsSet;
@@ -43,7 +41,6 @@ public class CardResource {
     public Response listWithNoCache() {
 
         List<CardRecord> response = new ArrayList<>();
-
 
         for (CardRecord cardRecord : cardRecordsSet) {
             response.add(cardRecord);
@@ -59,12 +56,26 @@ public class CardResource {
         return builder.build();
     }
 
+    @GET
+    @Path("/list")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response csvWithNoCache() throws IOException {
+
+        String response = new CardRecordsSetCsvMapper(cardRecordsSet).toCsv();
+
+        CacheControl cc = new CacheControl();
+        cc.setNoCache(true);
+        Response.ResponseBuilder builder = Response.ok(response, MediaType.TEXT_PLAIN_TYPE);
+        builder.cacheControl(cc);
+
+        return builder.build();
+    }
+
     @POST
     @Path("/form")
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void post(@BeanParam BankCardForm form,
-                     @Context HttpServletResponse servletResponse,
+    public void post(@BeanParam BankCardForm form, @Context HttpServletResponse servletResponse,
                      @Context HttpServletRequest servletRequest) throws IOException {
         boolean updated = Application.cardRecordsSet.add(form.toCardRecord());
         servletResponse.sendRedirect(servletRequest.getContextPath() + "/index.html?updated=" + updated);
@@ -74,8 +85,7 @@ public class CardResource {
     @Path("/upload")
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public void post(@FormDataParam("csv") FormDataContentDisposition csvForm,
-                     @FormDataParam("csv") String csv,
+    public void post(@FormDataParam("csv") FormDataContentDisposition csvForm, @FormDataParam("csv") String csv,
                      @Context HttpServletResponse servletResponse,
                      @Context HttpServletRequest servletRequest) throws IOException {
         CardRecordsSetCsvMapper csvMapper = new CardRecordsSetCsvMapper(Application.cardRecordsSet);

@@ -13,6 +13,9 @@ import java.util.Comparator;
 /**
  * AutoValue (https://github.com/google/auto/tree/master/value)
  * An immutable value type to represent the card record with nested values.
+ *
+ * Alternative is that CardRecord could implement Comparable instead.
+ *
  */
 @AutoValue
 @JsonSerialize(using = CardRecordSerializer.class)
@@ -33,15 +36,15 @@ public abstract class CardRecord {
     CardRecord() {
     }
 
+    @JsonCreator
+    public static CardRecord create(@JsonProperty("bankname") CardIssuer bank, @JsonProperty("cardnumber") CardNumber cardnumber, @JsonProperty("expiry") CardExpiry expiry) {
+        return new AutoValue_CardRecord(bank, cardnumber, expiry);
+    }
+
     public abstract CardIssuer issuer();
 
     public abstract CardNumber number();
 
     public abstract CardExpiry expiry();
-
-    @JsonCreator
-    public static CardRecord create(@JsonProperty("bank") CardIssuer bank, @JsonProperty("cardnumber") CardNumber cardnumber, @JsonProperty("expiry") CardExpiry expiry) {
-        return new AutoValue_CardRecord(bank, cardnumber, expiry);
-    }
 
 }
