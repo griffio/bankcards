@@ -77,7 +77,7 @@ public class CardResource {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void post(@BeanParam BankCardForm form, @Context HttpServletResponse servletResponse,
                      @Context HttpServletRequest servletRequest) throws IOException {
-        boolean updated = Application.cardRecordsSet.add(form.toCardRecord());
+        boolean updated = this.cardRecordsSet.add(form.toCardRecord());
         servletResponse.sendRedirect(servletRequest.getContextPath() + "/index.html?updated=" + updated);
     }
 
@@ -88,7 +88,7 @@ public class CardResource {
     public void post(@FormDataParam("csv") FormDataContentDisposition csvForm, @FormDataParam("csv") String csv,
                      @Context HttpServletResponse servletResponse,
                      @Context HttpServletRequest servletRequest) throws IOException {
-        CardRecordsSetCsvMapper csvMapper = new CardRecordsSetCsvMapper(Application.cardRecordsSet);
+        CardRecordsSetCsvMapper csvMapper = new CardRecordsSetCsvMapper(this.cardRecordsSet);
         int loaded = csvMapper.load(csv);
         log.debug(csvForm.getFileName());
         servletResponse.sendRedirect(servletRequest.getContextPath() + "/index.html?loaded=" + loaded);

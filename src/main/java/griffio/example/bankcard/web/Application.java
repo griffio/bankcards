@@ -13,7 +13,7 @@ import java.io.IOException;
 @ApplicationPath("/")
 public class Application extends ResourceConfig {
 
-    public static final CardRecordsSet cardRecordsSet = new CardRecordsSet();
+    private static final CardRecordsSet cardRecordsSet = new CardRecordsSet();
 
     private static ResourceConfig createResourceConfig() {
         return new ResourceConfig()
