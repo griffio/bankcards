@@ -23,7 +23,7 @@ public class CardRecordsSetCsvMapper {
 
         schema = CsvSchema.builder().addColumn("bankname").addColumn("cardnumber").addColumn("expiry").build();
         CsvMapper mapper = new com.fasterxml.jackson.dataformat.csv.CsvMapper();
-        csvReader = mapper.reader(CardRecord.class).with(schema);
+        csvReader = mapper.readerFor(CardRecord.class).with(schema);
 
     }
 

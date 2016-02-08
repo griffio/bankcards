@@ -24,8 +24,8 @@ apply from: 'wrapper.gradle'
 
 tasks.withType(JavaCompile) {
   description = "javac: ignore processor hints, keep all other hints"
-  sourceCompatibility = JavaVersion.VERSION_1_7
-  targetCompatibility = JavaVersion.VERSION_1_7
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
   options.compilerArgs += ["-Xlint:all,-processing"]
 }
 
