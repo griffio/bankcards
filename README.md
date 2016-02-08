@@ -62,7 +62,7 @@ http://localhost:8080/bankcards/index.html
 * POST /bankcards/application/form
 * POST /bankcards/application/upload
 
-### Jersey 2.15 Servlets
+### Jersey 2.22 Servlets
 
 There is no dependency injection required; Jersey 2 was used instead of Spring Boot, for a change.
 
