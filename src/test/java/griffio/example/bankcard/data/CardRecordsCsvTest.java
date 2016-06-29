@@ -4,12 +4,14 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.google.common.truth.Truth;
+
 import griffio.example.bankcard.CardRecord;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+
+import static com.google.common.truth.Truth.assertThat;
 
 public class CardRecordsCsvTest {
 
@@ -38,7 +40,7 @@ public class CardRecordsCsvTest {
             cardRecordsSet.add(row.nextValue());
         }
 
-        Truth.ASSERT.that(cardRecordsSet).hasSize(5);
+        assertThat(cardRecordsSet).hasSize(5);
 
     }
 
@@ -52,7 +54,7 @@ public class CardRecordsCsvTest {
             cardRecordsSet.add(row.nextValue());
         }
 
-        Truth.ASSERT.that(cardRecordsSet).hasSize(3);
+        assertThat(cardRecordsSet).hasSize(3);
 
     }
 
@@ -63,7 +65,7 @@ public class CardRecordsCsvTest {
         int loaded = cardRecordsSetCsvMapper.load(csv0);
         loaded += cardRecordsSetCsvMapper.load(csv1);
         loaded += cardRecordsSetCsvMapper.load(csv2);
-        Truth.ASSERT.that(loaded).isEqualTo(5);
+        assertThat(loaded).isEqualTo(5);
     }
 
 }

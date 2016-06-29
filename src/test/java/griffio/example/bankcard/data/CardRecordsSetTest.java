@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.google.common.truth.Truth.ASSERT;
+import static com.google.common.truth.Truth.assertThat;
 
 public class CardRecordsSetTest {
 
@@ -40,7 +40,7 @@ public class CardRecordsSetTest {
 
         log.debug(Iterables.toString(cardRecordsSet));
 
-        ASSERT.that(cardRecordsSet).containsExactly(dec2018, nov2017, oct2017).inOrder();
+        assertThat(cardRecordsSet).containsExactly(dec2018, nov2017, oct2017).inOrder();
 
     }
 

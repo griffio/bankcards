@@ -2,11 +2,13 @@ package griffio.example.bankcard;
 
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Iterables;
-import com.google.common.truth.Truth;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.google.common.truth.Truth.assertThat;
 
 public class CardRecordTest {
 
@@ -32,6 +34,6 @@ public class CardRecordTest {
         Iterable<CardRecord> cardData = new ImmutableSortedSet.Builder<>(CardRecord.ORDERING)
                 .add(nov2017, oct2017, dec2018, sameNov2017, duplicateNov2017).build();
         log.debug(Iterables.toString(cardData));
-        Truth.ASSERT.that(cardData).containsExactly(dec2018, nov2017, sameNov2017, oct2017).inOrder();
+        assertThat(cardData).containsExactly(dec2018, nov2017, sameNov2017, oct2017).inOrder();
     }
 }

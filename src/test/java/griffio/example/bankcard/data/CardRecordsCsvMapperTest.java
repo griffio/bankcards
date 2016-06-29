@@ -2,10 +2,11 @@ package griffio.example.bankcard.data;
 
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.google.common.truth.Truth;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.google.common.truth.Truth.assertThat;
 
 import java.io.IOException;
 
@@ -20,7 +21,7 @@ public class CardRecordsCsvMapperTest {
         CardRecordsSet cardRecords = new CardRecordsSet();
         int recordCount = new CardRecordsSetCsvMapper(cardRecords).load(fixture);
 
-        Truth.ASSERT.that(recordCount).isGreaterThan(0);
+        assertThat(recordCount).isGreaterThan(0);
 
         CsvSchema schema = CsvSchema.builder().addColumn("bankname").addColumn("cardnumber").addColumn("expiry").build();
         CsvMapper mapper = new CsvMapper();
@@ -28,7 +29,7 @@ public class CardRecordsCsvMapperTest {
 
         log.debug(csv);
 
-        Truth.ASSERT.that(csv).isEqualTo(TestFixtureResource.fixture("griffio.example.bankcard.data/data-masked.csv"));
+        assertThat(csv).isEqualTo(TestFixtureResource.fixture("griffio.example.bankcard.data/data-masked.csv"));
 
     }
 

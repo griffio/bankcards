@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Collections;
 import java.util.List;
 
-import static com.google.common.truth.Truth.ASSERT;
+import static com.google.common.truth.Truth.assertThat;
 
 public class CardExpiryTest {
 
@@ -40,14 +40,14 @@ public class CardExpiryTest {
         List<CardExpiry> expiryValues = Lists.newArrayList(nov2017, oct2017, dec2018, duplicateNov2017);
         Collections.sort(expiryValues);
         log.debug(Iterables.toString(expiryValues));
-        ASSERT.that(expiryValues).containsAllOf(dec2018, duplicateNov2017, nov2017, oct2017).inOrder();
+        assertThat(expiryValues).containsAllOf(dec2018, duplicateNov2017, nov2017, oct2017).inOrder();
     }
 
     @Test
     public void sort_set_by_expiry_date_in_descending_order() throws Exception {
         Iterable<CardExpiry> expiryValues = ImmutableSortedSet.of(nov2017, oct2017, dec2018, duplicateNov2017);
         log.debug(Iterables.toString(expiryValues));
-        ASSERT.that(expiryValues).containsExactly(dec2018, nov2017, oct2017).inOrder();
+        assertThat(expiryValues).containsExactly(dec2018, nov2017, oct2017).inOrder();
     }
 
 }

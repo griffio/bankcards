@@ -64,7 +64,7 @@ http://localhost:8080/bankcards/index.html
 
 ### Jersey 2.22 Servlets
 
-There is no dependency injection required; Jersey 2 was used instead of Spring Boot, for a change.
+There is no dependency injection required; Jersey (2.23.1) was used instead of Spring Boot, for a change.
 
 The application doesn't use any java view templates and is a simple Single Page Application located in index.html.
 
